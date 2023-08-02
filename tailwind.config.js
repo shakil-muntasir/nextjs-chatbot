@@ -15,4 +15,8 @@ module.exports = {
     },
   },
   plugins: [],
+  safelist: [
+    'justify-start',
+    'justify-end',
+],
 }

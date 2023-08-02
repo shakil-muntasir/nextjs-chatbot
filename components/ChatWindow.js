@@ -1,10 +1,26 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import ChatMessage from '@/components/ChatMessage'
 
 export default function ChatWindow() {
   const [userText, setUserText] = useState('')
-  const [conversation, setConversation] = useState([])
+  const [conversation, setConversation] = useState([
+    {
+      text: 'Greetings, user!',
+      isUser: false
+    },
+    {
+      text: 'Type "/questions" to get list of 5 random questions available',
+      isUser: false
+    }
+  ])
+
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    // Scroll to the bottom when new text is added
+    containerRef.current.scrollTop = containerRef.current.scrollHeight;
+  }, [userText, conversation]);
 
   const handleSendMessage = async e => {
     e.preventDefault()
@@ -52,7 +68,7 @@ export default function ChatWindow() {
 
   return (
     <div className='w-[400px] h-[500px] bg-blue-400/25 rounded flex flex-col items-center justify-between'>
-      <div className='flex-1 w-full py-2 px-3 overflow-hidden overflow-y-scroll'>
+      <div ref={containerRef} className='flex-1 w-full py-2 px-3 rounded overflow-hidden overflow-y-scroll'>
         <div className='flex flex-col space-y-3'>
           {conversation.map((message, index) => (
             <div key={index} className={`flex justify-${message.isUser ? 'end' : 'start'}`}>
