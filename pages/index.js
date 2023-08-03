@@ -2,9 +2,10 @@ import ChatWindow from '@/components/ChatWindow'
 
 export default function Home() {
   return (
-    <main className={`flex min-h-screen flex-col items-center justify-center`}>
-      <h1 className='font-semibold text-3xl text-cyan-700 mb-2'>ChatBot</h1>
-      <ChatWindow />
+    <main className={`flex justify-center bg-blue-400/25 sm:bg-white`}>
+      <div className='flex h-screen flex-col items-center justify-center sm:w-[400px] sm:bg-blue-400/25'>
+        <ChatWindow />
+      </div>
     </main>
   )
 }

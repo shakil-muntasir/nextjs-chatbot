@@ -33,26 +33,27 @@ function getRandomSubset(array, count) {
   return shuffled.slice(0, count)
 }
 
-const findAnswer = question => {
-  const questionWords = question.split(/\s+/)
+function containsGreeting(str) {
+  const greetingWords = ['hello', 'hi', 'hey', 'hola', 'greetings']
 
-  let matchedQA = null
-
-  for (const word of questionWords) {
-    const wordWithoutSymbols = word.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '')
-
-    let matchFound = false
-    for (const entry of data) {
-      if (entry.question.toLowerCase().includes(wordWithoutSymbols)) {
-        matchedQA = entry
-        matchFound = true
-        break // Stop searching once a match is found
-      }
-    }
-    if (matchFound) {
-      break
+  for (const greeting of greetingWords) {
+    if (str.toLowerCase().includes(greeting)) {
+      return true // Found a greeting word
     }
   }
+
+  return false // No greeting word found
+}
+
+const findAnswer = question => {
+  if (containsGreeting(question)) {
+    return 'Hello there good human!'
+  }
+
+  let matchedQA = data.find(qa => {
+    const questionWithoutSymbols = qa.question.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '')
+    return questionWithoutSymbols.includes(question.toLowerCase())
+  })
 
   if (matchedQA) {
     return matchedQA.answer

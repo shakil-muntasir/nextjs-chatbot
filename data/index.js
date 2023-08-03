@@ -1,9 +1,5 @@
 export const data = [
   {
-    question: 'Hey, Hi, Hello',
-    answer: 'Hello there good human!'
-  },
-  {
     question: 'What is your name?',
     answer: 'My name is ChatBot.'
   },
